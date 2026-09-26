@@ -76,15 +76,14 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     T(s, "A BOD STUDIO PRODUCT", { x: M + 0.78, y: 0.88, w: 3, h: 0.22, fontFace: F.label, bold: true, fontSize: 8.5, color: "2B3510", charSpacing: 2 });
     T(s, "PRODUCT SALES DECK  ·  2026", { x: 3.6, y: 0.55, w: 3.4, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: "2B3510", charSpacing: 2, align: "right" });
     T(s, [
-      { text: "Stop juggling.", options: { breakLine: true } },
-      { text: "Start shipping." },
-    ], { x: M, y: 1.95, w: 7.2, h: 2.3, fontFace: F.serif, italic: true, bold: true, fontSize: 66, color: C.ink, lineSpacingMultiple: 0.95 });
-    T(s, "Run your whole studio from one calm app.", { x: M, y: 4.35, w: 7, h: 0.45, fontFace: F.display, bold: true, fontSize: 21, color: C.ink });
-    T(s, "Tasks, approvals, billing prompts, standups and AI capture — one app instead of five. Built for marketing agencies and creative studios.", { x: M, y: 4.95, w: 6.2, h: 0.75, fontSize: 14, color: "25300C", lineSpacingMultiple: 1.2 });
+      { text: "Less admin.", options: { breakLine: true } },
+      { text: "More actual work." },
+    ], { x: M, y: 1.85, w: 7.6, h: 2.3, fontFace: F.serif, italic: true, bold: true, fontSize: 62, color: C.ink, lineSpacingMultiple: 0.95 });
+    T(s, "The task app your team looks forward to opening.", { x: M, y: 4.25, w: 7.6, h: 0.45, fontFace: F.display, bold: true, fontSize: 19, color: C.ink });
+    T(s, "Bod App takes care of the updates, follow-ups and standups, tells everyone what to do next and by when, and cheers the team on along the way.", { x: M, y: 4.85, w: 6.4, h: 0.8, fontSize: 14, color: "25300C", lineSpacingMultiple: 1.2 });
     pill(s, M, 5.95, 2.1, 0.5, "START FREE TRIAL  →", { fill: C.ink, color: C.lime, size: 10, cs: 1.5 });
     pill(s, M + 2.25, 5.95, 2.1, 0.5, "BOOK A DEMO", { fill: C.lime, line: C.ink, color: C.ink, size: 10, cs: 1.5 });
     T(s, "Kochi, Kerala  ·  info@storibodcreatives.com  ·  +91 7356 333 975  ·  mybodstudio.com", { x: M, y: H - 0.45, w: 8, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: "2B3510" });
-    // phone + floating chips
     const ph = 6.9, pw = ph * 0.49;
     s.addImage({ path: IMG("fig_home_crop.png"), x: 8.85, y: 0.3, w: pw, h: ph });
     const chip = (x, y, w, dot, text) => {
@@ -92,145 +91,158 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
       s.addShape("ellipse", { x: x + 0.18, y: y + 0.17, w: 0.12, h: 0.12, fill: { color: dot }, line: { type: "none" } });
       T(s, text, { x: x + 0.38, y, w: w - 0.45, h: 0.46, valign: "middle", fontSize: 11, bold: true, color: C.white });
     };
-    chip(7.35, 1.55, 2.35, C.red, "On fire · due today");
-    chip(10.5, 4.55, 2.5, C.lime, "57% shipped this week");
-    chip(7.55, 5.35, 2.2, C.green, "6 PM standup ready");
-    s.addNotes("Open on the promise: one calm app that replaces the five places a studio's work lives today. Bod App is a Bod Studio product, built and run inside Storibod first.");
+    chip(10.35, 2.85, 2.55, C.lime, "Nice — 4 shipped last week");
+    chip(10.5, 4.55, 2.5, C.red, "On fire · due today");
+    chip(7.45, 5.35, 2.5, C.green, "Standup written for you");
+    s.addNotes("Open on the feeling, not the feature list. Bod App is a task app people want to open, because it does the boring half of work for them and makes the rest feel lighter.");
   }
 
   // ===== 2. PROBLEM =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    header(s, "01  ·  THE PROBLEM", "Your team isn't disorganised. Your tools are.", "A busy studio's work lives in five places at once — so none of it can be tracked honestly.");
-    T(s, "WHERE THE WORK LIVES TODAY", { x: M, y: 2.45, w: 5, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.dim, charSpacing: 2 });
+    header(s, "01  ·  THE PROBLEM", "Nobody joined a studio to update trackers.", "But creative teams lose a slice of every day to the boring half of work.");
+    T(s, "THE BORING HALF", { x: M, y: 2.45, w: 5, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.dim, charSpacing: 2 });
     const rows = [
-      ["LuMessageCircle", "WhatsApp", "Briefs, approvals and follow-ups"],
-      ["LuSheet", "Spreadsheets", "The task list nobody updates"],
-      ["LuMail", "Email", "Files, feedback and revisions"],
-      ["LuBrain", "Memory", "What's done and ready to bill"],
-      ["LuUsers", "Meetings", "The daily \"where are we?\""],
+      ["LuListTodo", "Updating task status, again"],
+      ["LuMessageCircle", "Chasing follow-ups on WhatsApp"],
+      ["LuUsers", "Writing and sitting through the standup"],
+      ["LuCalendarX", "Working out who's doing what, by when"],
+      ["LuReceipt", "Digging for what's ready to bill"],
+      ["LuSheet", "Building a report for the founder"],
     ];
     for (let i = 0; i < rows.length; i++) {
-      const y = 2.8 + i * 0.74;
-      card(s, M, y, 5.7, 0.62, C.surface, C.line, 0.12);
-      await iconBadge(s, rows[i][0], M + 0.1, y + 0.1, 0.42, C.surface2, C.muted);
-      T(s, rows[i][1], { x: M + 0.68, y, w: 1.6, h: 0.62, valign: "middle", fontFace: F.display, bold: true, fontSize: 14 });
-      T(s, rows[i][2], { x: M + 2.3, y, w: 3.3, h: 0.62, valign: "middle", fontSize: 12.5, color: C.muted });
+      const y = 2.8 + i * 0.62;
+      card(s, M, y, 6.1, 0.52, C.surface, C.line, 0.12);
+      s.addImage({ data: await icon(rows[i][0], C.muted), x: M + 0.2, y: y + 0.13, w: 0.26, h: 0.26 });
+      T(s, rows[i][1], { x: M + 0.65, y, w: 5.3, h: 0.52, valign: "middle", fontSize: 14 });
     }
-    const pains = [
-      ["LuCalendarX", C.red, "Deadlines slip quietly", "You hear about it when the client calls, not the day it happens."],
-      ["LuReceipt", C.yellow, "Delivered work goes unbilled", "Shipped deliverables fall through the gap between done and invoiced."],
-      ["LuEyeOff", C.blue, "Founders fly blind", "There's no honest read of where the week — or the team's capacity — went."],
-    ];
-    for (let i = 0; i < pains.length; i++) {
-      const y = 2.45 + i * 1.3, x = 6.85;
-      card(s, x, y, W - M - x, 1.15);
-      await iconBadge(s, pains[i][0], x + 0.25, y + 0.3, 0.55, C.surface2, pains[i][1]);
-      T(s, pains[i][2], { x: x + 1.05, y: y + 0.22, w: 4.6, h: 0.35, fontFace: F.display, bold: true, fontSize: 17 });
-      T(s, pains[i][3], { x: x + 1.05, y: y + 0.6, w: 4.6, h: 0.45, fontSize: 12.5, color: C.muted });
-    }
-    T(s, [
-      { text: "THE RESULT   ", options: { fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 } },
-      { text: "The project tool gets abandoned by month two, and the team goes back to chasing each other.", options: { fontSize: 14, bold: true, color: C.white } },
-    ], { x: M, y: 6.55, w: W - 2 * M, h: 0.35, valign: "middle" });
+    const x = 7.1, w = W - M - x;
+    card(s, x, 2.45, w, 2.35, C.surface);
+    T(s, "30 min", { x: x + 0.4, y: 2.7, w: 3, h: 0.8, fontFace: F.display, bold: true, fontSize: 44, color: C.lime });
+    T(s, "PER PERSON, EVERY DAY", { x: x + 0.4, y: 3.55, w: w - 0.8, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.white, charSpacing: 1.5 });
+    T(s, "For a ten-person team that's about 110 hours a month — most of a full-time salary spent on admin.", { x: x + 0.4, y: 3.85, w: w - 0.8, h: 0.7, fontSize: 12.5, color: C.muted, lineSpacingMultiple: 1.15 });
+    card(s, x, 4.95, w, 1.45, C.surface);
+    await iconBadge(s, "LuEyeOff", x + 0.3, 5.2, 0.5, C.surface2, C.red);
+    T(s, "So the tool gets abandoned.", { x: x + 1.0, y: 5.15, w: w - 1.3, h: 0.34, fontFace: F.display, bold: true, fontSize: 15 });
+    T(s, "Project software feels like homework. By month two, people stop opening it.", { x: x + 1.0, y: 5.52, w: w - 1.3, h: 0.7, fontSize: 12, color: C.muted, lineSpacingMultiple: 1.15 });
+    T(s, "Illustration: 10 people · 22 working days · 30 minutes of coordination per person per day.", { x: M, y: 6.72, w: W - 2 * M, h: 0.22, fontSize: 9.5, color: C.dim });
     footer(s, n);
-    s.addNotes("Name the pain before the product. Most studios aren't disorganised — their work is split across WhatsApp, sheets, email, memory and meetings. The cost shows up as slipped deadlines, unbilled work and a founder with no real view.");
+    s.addNotes("Every creative team has a boring half: updating status, chasing follow-ups, standups, billing checks, reports. It costs about 30 minutes a person a day, and it's why project tools get abandoned. They add to the homework instead of removing it.");
   }
 
-  // ===== 3. MEET BOD APP =====
+  // ===== 3. THE IDEA =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    header(s, "02  ·  MEET BOD APP", "One calm app for\nthe whole studio.", null, { w: 7.2, th: 1.3 });
-    T(s, "The workspace a marketing agency runs on: tasks, approvals, billing, AI capture and standups in one place. Built and battle-tested inside Storibod's own studio.", { x: M, y: 2.25, w: 6.6, h: 0.8, fontSize: 14, color: C.muted, lineSpacingMultiple: 1.2 });
-    const stats = [
-      ["5→1", "Tools, replaced", "Tasks, approvals, billing prompts, standups and AI in one app."],
-      ["3", "Languages, spoken", "Capture work in Malayalam, English or Manglish — voice or text."],
-      ["6 PM", "Standup, automated", "A daily digest of what shipped and what's next, written for you."],
-      ["3", "Platforms, one app", "iOS, Android and web — at the desk or on a shoot, always in sync."],
-    ];
-    for (let i = 0; i < 4; i++) {
-      const x = M + (i % 2) * 3.35, y = 3.3 + Math.floor(i / 2) * 1.8, w = 3.2, h = 1.65;
-      card(s, x, y, w, h);
-      T(s, stats[i][0], { x: x + 0.3, y: y + 0.15, w: w - 0.5, h: 0.7, fontFace: F.display, bold: true, fontSize: 36, color: C.lime });
-      T(s, stats[i][1].toUpperCase(), { x: x + 0.3, y: y + 0.85, w: w - 0.5, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.white, charSpacing: 1.5 });
-      T(s, stats[i][2], { x: x + 0.3, y: y + 1.1, w: w - 0.5, h: 0.5, fontSize: 11, color: C.muted, lineSpacingMultiple: 1.1 });
+    header(s, "02  ·  THE IDEA", "Bod App does the boring half.\nYour team does the work.", null, { th: 1.3 });
+    const cw = (W - 2 * M - 0.3) / 2, y = 2.5, ch = 3.65;
+    card(s, M, y, cw, ch, C.lime, null);
+    T(s, "THE APP TAKES CARE OF", { x: M + 0.4, y: y + 0.35, w: 5, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.ink, charSpacing: 2 });
+    const app = [["LuTarget", "Sorting today's priorities"], ["LuBellRing", "Follow-ups and reminders"], ["LuClock", "The daily standup"], ["LuReceipt", "The what-to-bill checklist"], ["LuChartColumn", "Reports for the founder"]];
+    for (let i = 0; i < app.length; i++) {
+      const ry = y + 0.8 + i * 0.52;
+      s.addImage({ data: await icon(app[i][0], C.ink, 2), x: M + 0.4, y: ry + 0.05, w: 0.28, h: 0.28 });
+      T(s, app[i][1], { x: M + 0.85, y: ry, w: cw - 1.2, h: 0.38, valign: "middle", fontSize: 15, bold: true, color: C.ink });
     }
-    const ph = 6.5;
-    s.addImage({ path: IMG("fig_left_home_crop.png"), x: 7.75, y: 0.62, w: ph * 0.3627, h: ph });
-    s.addImage({ path: IMG("fig_right_tasks_crop.png"), x: 10.3, y: 0.62, w: ph * 0.3613, h: ph });
+    const x2 = M + cw + 0.3;
+    card(s, x2, y, cw, ch);
+    T(s, "YOUR TEAM GETS BACK TO", { x: x2 + 0.4, y: y + 0.35, w: 5, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
+    const team = [["LuPenTool", "The brief and the design"], ["LuMic", "The script, the shoot, the edit"], ["LuSparkles", "The campaign idea"], ["LuUsers", "The client conversation"], ["LuSmile", "Actually enjoying the week"]];
+    for (let i = 0; i < team.length; i++) {
+      const ry = y + 0.8 + i * 0.52;
+      s.addImage({ data: await icon(team[i][0], C.lime, 2), x: x2 + 0.4, y: ry + 0.05, w: 0.28, h: 0.28 });
+      T(s, team[i][1], { x: x2 + 0.85, y: ry, w: cw - 1.2, h: 0.38, valign: "middle", fontSize: 15, bold: true });
+    }
+    T(s, [
+      { text: "One clear answer every time you open it:  ", options: { bold: true, color: C.white } },
+      { text: "what to do next, and by when.", options: { bold: true, color: C.lime } },
+    ], { x: M, y: 6.4, w: W - 2 * M, h: 0.35, fontSize: 15, valign: "middle" });
     footer(s, n);
-    s.addNotes("Bod App in one line: the workspace an agency runs on. Four numbers do the selling — five tools become one, three languages, a standup written at 6 PM, and one app across iOS, Android and web.");
+    s.addNotes("This is the whole pitch in one slide. The app takes the clerical work off people's plates, so the team spends its time on the work clients actually pay for.");
   }
 
-  // ===== 4. FOCUS =====
+  // ===== 4. PLAYFUL =====
+  {
+    const s = pres.addSlide(); n++; bg(s);
+    header(s, "03  ·  THE PLAYFUL PART", "Work that feels a bit like Duolingo.", "Small wins celebrated. Gentle nudges, never scolding. A reason to open the app every day.");
+    const cx = M, cy = 2.5, cwid = 6.3;
+    card(s, cx, cy, cwid, 4.1, C.surface);
+    T(s, "EVERY MONDAY, ON THE HOME SCREEN", { x: cx + 0.35, y: cy + 0.3, w: 5.5, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.dim, charSpacing: 2 });
+    const iw = cwid - 0.7, ih = iw * 728 / 2002;
+    s.addImage({ path: IMG("recap_card.png"), x: cx + 0.35, y: cy + 0.7, w: iw, h: ih, rounding: false });
+    T(s, "Bod Annan, the studio's in-app buddy, turns last week into a small win the whole team can see.", { x: cx + 0.35, y: cy + 0.9 + ih, w: iw, h: 0.7, fontSize: 13, color: C.muted, lineSpacingMultiple: 1.2 });
+    const p = [
+      ["LuSmile", "Meet Bod Annan", "Shows up for the good moments — a recap, a milestone, an empty inbox. Never to scold."],
+      ["LuZap", "Weekly momentum", "What you shipped, clients served and turnaround, celebrated every week."],
+      ["LuSparkles", "Vibe status", "Long-press a task to set its mood: On fire, Waiting on client, Ready for review."],
+      ["LuMessageCircle", "Words that encourage", "“Nice — you shipped 4 things this week.” Not “4 pending action items!!!”"],
+    ];
+    const x = 7.2, w = W - M - x;
+    for (let i = 0; i < 4; i++) {
+      const y = 2.5 + i * 1.05;
+      card(s, x, y, w, 0.92);
+      await iconBadge(s, p[i][0], x + 0.22, y + 0.2, 0.52);
+      T(s, p[i][1], { x: x + 0.95, y: y + 0.12, w: w - 1.1, h: 0.32, fontFace: F.display, bold: true, fontSize: 14.5 });
+      T(s, p[i][2], { x: x + 0.95, y: y + 0.45, w: w - 1.1, h: 0.42, fontSize: 11, color: C.muted, lineSpacingMultiple: 1.05 });
+    }
+    footer(s, n);
+    s.addNotes("This is what makes Bod App different from every other task tool. Like Duolingo, it makes coming back feel good: a weekly win from Bod Annan, a vibe on every task, and copy that encourages instead of nagging. Bod Annan appears at about one in five moments, so it stays charming, not annoying.");
+  }
+
+  // ===== 5. A DAY WITH BOD APP =====
+  {
+    const s = pres.addSlide(); n++; bg(s);
+    header(s, "04  ·  A DAY WITH BOD APP", "The app runs the admin.\nYou run the day.", null, { w: 7.5, th: 1.3, noBrand: true });
+    const d = [
+      ["9:00 AM", "Open the app. Today is already sorted.", "“4 tasks need your attention today” — overdue first."],
+      ["11:30 AM", "Speak a task in Manglish. It's assigned.", "Assignee, deadline and priority filled in for you."],
+      ["2:00 PM", "Waiting on a client? The nudge is drafted.", "After 48 hours, the follow-up writes itself."],
+      ["4:30 PM", "Long-press to set the vibe.", "Leads feel the load without a single check-in."],
+      ["6:00 PM", "Your standup is written. One tap to post.", "What shipped and what's next, for the whole team."],
+      ["MONDAY", "Bod Annan celebrates last week.", "“You shipped 4 deliverables last week.”"],
+    ];
+    const x0 = M, y0 = 2.45, rh = 0.7;
+    s.addShape("line", { x: x0 + 0.62, y: y0 + 0.2, w: 0, h: rh * 5, line: { color: C.line, width: 1.5 } });
+    for (let i = 0; i < d.length; i++) {
+      const y = y0 + i * rh, last = i === d.length - 1;
+      pill(s, x0, y + 0.04, 1.24, 0.32, d[i][0], { fill: last ? C.lime : C.surface2, color: last ? C.ink : C.lime, size: 8.5, cs: 1 });
+      T(s, d[i][1], { x: x0 + 1.5, y: y, w: 6.3, h: 0.34, fontFace: F.display, bold: true, fontSize: 14.5 });
+      T(s, d[i][2], { x: x0 + 1.5, y: y + 0.33, w: 6.3, h: 0.3, fontSize: 11.5, color: C.muted });
+    }
+    const ph = 6.6;
+    s.addImage({ path: IMG("fig_focus_crop.png"), x: 9.15, y: 0.45, w: ph * 0.49, h: ph });
+    footer(s, n);
+    s.addNotes("Walk through a real day. Notice that nobody on the team updates a tracker, writes a standup or chases a client by hand. The app does it, and the team's attention stays on the work.");
+  }
+
+  // ===== 6. WHAT TO DO, BY WHEN =====
   {
     const s = pres.addSlide(); n++; bg(s);
     const ph = 6.6;
-    s.addImage({ path: IMG("fig_focus_crop.png"), x: 1.0, y: 0.45, w: ph * 0.49, h: ph });
+    s.addImage({ path: IMG("fig_home_crop.png"), x: 1.0, y: 0.45, w: ph * 0.49, h: ph });
     const x = 5.3, w = W - M - x;
-    T(s, "03  ·  SMART FOCUS QUEUE", { x, y: 0.9, w, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
-    T(s, "Start every day already sorted.", { x, y: 1.25, w, h: 0.75, fontFace: F.display, bold: true, fontSize: 30 });
-    T(s, "Open the app and today is decided for you — overdue and blocked work first, the rest in the order that keeps clients happy. No planning meeting, no scrolling a board.", { x, y: 2.1, w: 6.9, h: 0.9, fontSize: 15, color: C.muted, lineSpacingMultiple: 1.2 });
+    T(s, "05  ·  WHAT TO DO, BY WHEN", { x, y: 0.9, w, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
+    T(s, "No planning. Just the next thing.", { x, y: 1.25, w, h: 0.75, fontFace: F.display, bold: true, fontSize: 30 });
+    T(s, "Everyone opens the app to a short, sorted list and a clear deadline. The app decides the order, so the team can just start.", { x, y: 2.1, w: 6.9, h: 0.9, fontSize: 15, color: C.muted, lineSpacingMultiple: 1.2 });
     const b = [
-      ["LuTarget", "Overdue & blocked surfaced at the top", "The queue is auto-sorted every morning, per person."],
-      ["LuZap", "One tap into a calm focus mode", "Just today's work — nothing else competing for attention."],
-      ["LuSmile", "Vibe status, so the team feels the load", "Tap to set the mood of a task. Leads see pressure before it becomes a problem."],
+      ["LuTarget", "Smart Focus Queue", "Overdue and due-today first, blocked work tucked aside. Sorted every morning, per person."],
+      ["LuSparkles", "“What's next?” AI", "Not sure what to pick up? Ask, and get the next task with a reason."],
+      ["LuSunrise", "A daily AI briefing", "A short personal summary of the day, right on the home screen."],
+      ["LuSmartphone", "Home-screen widgets", "Top tasks and the AI briefing without even opening the app."],
     ];
     for (let i = 0; i < b.length; i++) {
-      const y = 3.25 + i * 0.95;
+      const y = 3.2 + i * 0.85;
       await iconBadge(s, b[i][0], x, y, 0.55);
-      T(s, b[i][1], { x: x + 0.8, y: y - 0.02, w: 6.3, h: 0.32, fontFace: F.display, bold: true, fontSize: 16 });
-      T(s, b[i][2], { x: x + 0.8, y: y + 0.32, w: 6.3, h: 0.5, fontSize: 12.5, color: C.muted });
-    }
-    T(s, "VIBE STATUS", { x, y: 6.2, w: 2, h: 0.3, valign: "middle", fontFace: F.label, bold: true, fontSize: 9, color: C.dim, charSpacing: 2 });
-    const vibes = [["On fire", C.red], ["Waiting on client", C.yellow], ["Ready for review", C.green], ["Backburner", C.muted]];
-    let vx = x + 1.35;
-    for (const [t, c] of vibes) {
-      const vw = 0.4 + t.length * 0.075;
-      pill(s, vx, 6.2, vw, 0.32, t, { fill: C.surface2, color: c, size: 9.5, font: F.body, cs: 0 });
-      vx += vw + 0.1;
+      T(s, b[i][1], { x: x + 0.8, y: y - 0.02, w: 6.3, h: 0.32, fontFace: F.display, bold: true, fontSize: 15.5 });
+      T(s, b[i][2], { x: x + 0.8, y: y + 0.3, w: 6.3, h: 0.45, fontSize: 12, color: C.muted });
     }
     footer(s, n);
-    s.addNotes("This is the screen designers and creators live in. Every morning the queue is already sorted — overdue and blocked first. Vibe status lets the team say how a task feels, so leads spot overload early.");
-  }
-
-  // ===== 5. WORKFLOW =====
-  {
-    const s = pres.addSlide(); n++; bg(s);
-    header(s, "04  ·  THE WORKFLOW", "Brief to billed.", "Five stages, role-aware at every step. Nothing shipped goes uninvoiced.");
-    const st = [
-      ["Pending", "Captured or requested. Waits for approval.", "PM APPROVES", C.muted],
-      ["In Progress", "Assigned and moving, with a live vibe.", "TEAM OWNS", C.blue],
-      ["Completed", "Delivered. Counts toward your week.", "TEAM MARKS", C.green],
-      ["Ready to Bill", "Enters the Finance queue with notes.", "PM HANDS OFF", C.lime],
-      ["Billed", "Invoiced in Zoho and closed out.", "FINANCE CLOSES", C.yellow],
-    ];
-    const cw = 2.25, gap = (W - 2 * M - 5 * cw) / 4, y = 2.5, ch = 3.1;
-    s.addShape("line", { x: M + 0.5, y: y + 0.62, w: W - 2 * M - 1.0, h: 0, line: { color: C.line, width: 1.5, dashType: "dash" } });
-    for (let i = 0; i < 5; i++) {
-      const x = M + i * (cw + gap);
-      card(s, x, y, cw, ch);
-      s.addShape("ellipse", { x: x + 0.25, y: y + 0.3, w: 0.62, h: 0.62, fill: { color: st[i][3] }, line: { type: "none" } });
-      T(s, String(i + 1), { x: x + 0.25, y: y + 0.3, w: 0.62, h: 0.62, align: "center", valign: "middle", fontFace: F.display, bold: true, fontSize: 18, color: C.ink });
-      T(s, st[i][0], { x: x + 0.25, y: y + 1.12, w: cw - 0.4, h: 0.4, fontFace: F.display, bold: true, fontSize: 18 });
-      T(s, st[i][1], { x: x + 0.25, y: y + 1.58, w: cw - 0.45, h: 0.8, fontSize: 12.5, color: C.muted, lineSpacingMultiple: 1.15 });
-      pill(s, x + 0.25, y + ch - 0.62, cw - 0.5, 0.36, st[i][2], { fill: C.surface2, color: st[i][3], size: 8.5, cs: 1.2 });
-      if (i < 4) T(s, "→", { x: x + cw, y: y + 0.4, w: gap, h: 0.42, align: "center", valign: "middle", fontSize: 16, bold: true, color: C.dim });
-    }
-    T(s, [
-      { text: "Role-gated at every step.  ", options: { bold: true, color: C.white } },
-      { text: "People can only move work their role owns. Billed work is archived; cancelled work stays off-track.", options: { color: C.muted, breakLine: true } },
-      { text: "No change to your accounting.  ", options: { bold: true, color: C.white } },
-      { text: "Finance works a first-come Ready to Bill queue with an urgent-bill flag. Amounts stay in Zoho.", options: { color: C.muted } },
-    ], { x: M, y: 5.95, w: W - 2 * M, h: 0.75, fontSize: 13, valign: "top", lineSpacingMultiple: 1.3 });
-    footer(s, n);
-    s.addNotes("Walk the pipeline left to right and name who owns each step. The key sell for founders is stage four: Ready to Bill. Delivered work lands in Finance's queue automatically, so nothing shipped goes uninvoiced. Invoicing itself stays in Zoho.");
+    s.addNotes("The core promise for team members: you never have to decide what to work on. The Focus Queue sorts the day, the AI answers 'what's next?', and the widget puts it on the home screen.");
   }
 
   // ===== 6. AI CAPTURE =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    T(s, "05  ·  AI CAPTURE", { x: M, y: 0.9, w: 6, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
+    T(s, "06  ·  NO TYPING, NO FORMS", { x: M, y: 0.9, w: 6, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
     T(s, "Speak it. It becomes a task.", { x: M, y: 1.25, w: 6, h: 1.3, fontFace: F.display, bold: true, fontSize: 34 });
     T(s, "A voice note or a messy line of notes turns into a clean, assigned task — the who, what and when already filled in. In the language your team actually speaks.", { x: M, y: 2.6, w: 5.6, h: 1.0, fontSize: 15, color: C.muted, lineSpacingMultiple: 1.2 });
     const langs = ["Malayalam", "English", "Manglish", "Voice → task", "PDF → tasks"];
@@ -266,92 +278,86 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     s.addNotes("Play this out loud if you can. A Manglish voice note becomes a fully-formed draft task — assignee, deadline and priority parsed — sitting in the PM's approvals inbox. It also works from messy notes or a PDF brief.");
   }
 
-  // ===== 7. ANALYTICS / FOUNDER =====
+  // ===== 8. AUTOMATIONS =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    T(s, "06  ·  ANALYTICS & AUTO STANDUP", { x: M, y: 0.9, w: 7, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
-    T(s, "See the whole studio at a glance.", { x: M, y: 1.25, w: 8.0, h: 0.75, fontFace: F.display, bold: true, fontSize: 30 });
-    T(s, "Deliverables shipped, clients served, average turnaround — the numbers a founder actually asks for, without a single spreadsheet.", { x: M, y: 2.1, w: 7.2, h: 0.8, fontSize: 15, color: C.muted, lineSpacingMultiple: 1.2 });
-    const b = [
-      ["LuChartColumn", "Output per client", "Every client gets its own colour, so the workload split is obvious."],
-      ["LuSparkles", "AI summaries", "A daily briefing per person and a plain-English read of the week."],
-      ["LuClock", "Auto standup at 6 PM", "A daily digest of what shipped and what's next. One tap to copy."],
-      ["LuBellRing", "Blocked-task nudges", "48 hours waiting on a client? The follow-up is drafted for you."],
+    header(s, "07  ·  THE APP DOES THE CHASING", "The clerical work, handled.", "Six jobs your team does by hand today, which Bod App now does on its own.");
+    const a = [
+      ["LuClock", "The standup", "Writing the daily update.", "A 6 PM digest is written for you. One tap to post."],
+      ["LuBellRing", "Follow-ups", "Chasing clients on WhatsApp.", "48 hours waiting? A nudge is drafted and ready."],
+      ["LuSmile", "Status checks", "Asking everyone where things are.", "Status and vibe live on every task card."],
+      ["LuTarget", "Planning the day", "Scrolling a board to decide.", "The Focus Queue sorts it every morning."],
+      ["LuReceipt", "Billing", "Digging through chats for billables.", "Done work lands in the Ready to Bill queue."],
+      ["LuChartColumn", "Reports", "Building a sheet for the founder.", "Analytics and a plain-English AI summary."],
     ];
-    for (let i = 0; i < 4; i++) {
-      const x = M + (i % 2) * 3.7, y = 3.2 + Math.floor(i / 2) * 1.75, w = 3.55, h = 1.6;
-      card(s, x, y, w, h);
-      await iconBadge(s, b[i][0], x + 0.25, y + 0.25, 0.48);
-      T(s, b[i][1], { x: x + 0.25, y: y + 0.85, w: w - 0.45, h: 0.3, fontFace: F.display, bold: true, fontSize: 13.5 });
-      T(s, b[i][2], { x: x + 0.25, y: y + 1.13, w: w - 0.45, h: 0.42, fontSize: 10.5, color: C.muted, lineSpacingMultiple: 1.05 });
+    const gx = 0.22, cw = (W - 2 * M - 2 * gx) / 3, ch = 2.0;
+    for (let i = 0; i < 6; i++) {
+      const x = M + (i % 3) * (cw + gx), y = 2.4 + Math.floor(i / 3) * (ch + 0.2);
+      card(s, x, y, cw, ch);
+      await iconBadge(s, a[i][0], x + 0.28, y + 0.28, 0.5);
+      T(s, a[i][1], { x: x + 0.95, y: y + 0.28, w: cw - 1.2, h: 0.5, valign: "middle", fontFace: F.display, bold: true, fontSize: 16 });
+      T(s, [{ text: "BEFORE  ", options: { fontFace: F.label, bold: true, fontSize: 8, color: C.red, charSpacing: 1.5 } }, { text: a[i][2], options: { color: C.muted, fontSize: 11.5 } }], { x: x + 0.28, y: y + 0.95, w: cw - 0.5, h: 0.3, valign: "middle" });
+      T(s, [{ text: "NOW  ", options: { fontFace: F.label, bold: true, fontSize: 8, color: C.lime, charSpacing: 1.5 } }, { text: a[i][3], options: { color: C.white, fontSize: 11.5, bold: true } }], { x: x + 0.28, y: y + 1.3, w: cw - 0.5, h: 0.55, valign: "top", lineSpacingMultiple: 1.1 });
+    }
+    footer(s, n);
+    s.addNotes("Go card by card and ask who on their team does this today. Every card is a job the app now does by itself.");
+  }
+
+  // ===== 9. DATA, MADE FRIENDLY =====
+  {
+    const s = pres.addSlide(); n++; bg(s);
+    T(s, "08  ·  DATA, MADE FRIENDLY", { x: M, y: 0.9, w: 7, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: C.lime, charSpacing: 2 });
+    T(s, "Numbers that cheer you on.", { x: M, y: 1.25, w: 8.0, h: 0.75, fontFace: F.display, bold: true, fontSize: 30 });
+    T(s, "Shipped work, clients served and turnaround in plain words, with an AI summary that reads like a team lead talking, not a dashboard shouting.", { x: M, y: 2.05, w: 7.6, h: 0.8, fontSize: 14.5, color: C.muted, lineSpacingMultiple: 1.2 });
+    card(s, M, 3.05, 7.6, 1.2, "1A2210", "3C4D12");
+    T(s, "AI SUMMARY  ·  EXAMPLE", { x: M + 0.35, y: 3.25, w: 5, h: 0.22, fontFace: F.label, bold: true, fontSize: 8.5, color: C.lime, charSpacing: 1.5 });
+    T(s, "“Output is up 18% vs last week. Design is your busiest category; two OXY tasks are blocked on client feedback.”", { x: M + 0.35, y: 3.52, w: 6.9, h: 0.65, fontSize: 13.5, bold: true, lineSpacingMultiple: 1.15 });
+    T(s, "HOW BOD APP TALKS", { x: M, y: 4.5, w: 5, h: 0.22, fontFace: F.label, bold: true, fontSize: 9, color: C.dim, charSpacing: 2 });
+    const t = [["4 tasks need your attention today.", "You have 4 pending action items!!!"], ["Ready to bill — 6 deliverables.", "Invoice-eligible entities: 6."], ["Nice — you shipped 4 things this week.", "Weekly throughput report generated."]];
+    for (let i = 0; i < 3; i++) {
+      const y = 4.85 + i * 0.58;
+      card(s, M, y, 3.72, 0.48, C.surface, C.line, 0.1);
+      s.addImage({ data: await icon("LuCheck", C.lime, 2.5), x: M + 0.15, y: y + 0.12, w: 0.22, h: 0.22 });
+      T(s, t[i][0], { x: M + 0.48, y, w: 3.2, h: 0.48, valign: "middle", fontSize: 11.5, bold: true });
+      card(s, M + 3.88, y, 3.72, 0.48, C.surface, C.line, 0.1);
+      s.addImage({ data: await icon("LuX", C.red, 2.5), x: M + 4.03, y: y + 0.12, w: 0.22, h: 0.22 });
+      T(s, t[i][1], { x: M + 4.36, y, w: 3.2, h: 0.48, valign: "middle", fontSize: 11.5, color: C.dim });
     }
     const ph = 6.6;
     s.addImage({ path: IMG("fig_analytics_crop.png"), x: 9.05, y: 0.45, w: ph * 0.49, h: ph });
     footer(s, n);
-    s.addNotes("This is the founder's slide. Analytics, a weekly AI summary and a 6 PM standup mean the founder never has to ask for a status update. Blocked-task nudges take chasing off the PM's plate.");
+    s.addNotes("Founders get the numbers they ask for without building a sheet, and the team gets encouragement instead of pressure. The tone is part of the product: it talks like a calm team lead.");
   }
 
-  // ===== 8. FEATURE BENTO =====
+  // ===== 10. ROLES =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    header(s, "07  ·  EVERYTHING IN ONE WORKSPACE", "Less juggling. More shipping.", "Twelve features that replace a board, a sheet, a WhatsApp group and a standup meeting.");
-    const f = [
-      ["LuListTodo", "Focus Queue", "One auto-sorted list for today, overdue first."],
-      ["LuWorkflow", "Task pipeline", "Pending to Billed, role-aware at every step."],
-      ["LuSmile", "Vibe status", "Long-press a task to set its mood."],
-      ["LuMic", "AI capture", "Voice or text in Malayalam, English, Manglish."],
-      ["LuPalette", "Client colours", "Every client gets its own accent, everywhere."],
-      ["LuBellRing", "Smart nudges", "A follow-up drafted after 48h on a client."],
-      ["LuClock", "Auto standup", "A 6 PM digest, one tap to copy or post."],
-      ["LuReceipt", "Billing checklist", "What to bill, not how much. Zoho keeps the rest."],
-      ["LuInbox", "Approvals hub", "Requests, notes and PDF tasks in one PM inbox."],
-      ["LuMessageCircle", "Team & task chat", "Group and per-task threads, files, voice notes."],
-      ["LuSparkles", "What's next? AI", "Ask which task to pick up next. Get a reason."],
-      ["LuSmartphone", "Home widgets", "Your top tasks and AI briefing on the home screen."],
-    ];
-    const gx = 0.2, gy = 0.18, cw = (W - 2 * M - 3 * gx) / 4, ch = 1.38;
-    for (let i = 0; i < 12; i++) {
-      const x = M + (i % 4) * (cw + gx), y = 2.35 + Math.floor(i / 4) * (ch + gy);
-      card(s, x, y, cw, ch);
-      await iconBadge(s, f[i][0], x + 0.22, y + 0.22, 0.46);
-      T(s, f[i][1], { x: x + 0.82, y: y + 0.22, w: cw - 0.95, h: 0.46, valign: "middle", fontFace: F.display, bold: true, fontSize: 14 });
-      T(s, f[i][2], { x: x + 0.22, y: y + 0.8, w: cw - 0.4, h: 0.5, fontSize: 11, color: C.muted, lineSpacingMultiple: 1.1 });
-    }
-    footer(s, n);
-    s.addNotes("The full feature set on one page. Point out that none of these need setup or training — they show up the moment the team starts adding tasks.");
-  }
-
-  // ===== 9. ROLES =====
-  {
-    const s = pres.addSlide(); n++; bg(s);
-    header(s, "08  ·  BUILT FOR THE WHOLE STUDIO", "One app, every seat.", "Everyone sees the same work through their own lens — no status meetings required.");
+    header(s, "09  ·  EVERY SEAT GETS LIGHTER", "What each person stops doing.", "Same work, seen through each person's lens — minus the admin.");
     const r = [
-      ["LuCrown", "Founder", "The whole studio at a glance — deliverables shipped, clients served, and what's ready to bill.", ["Analytics", "AI weekly summary", "6 PM standup"]],
-      ["LuClipboardCheck", "Project manager", "Assign, chase and approve from one inbox. Blocked-task nudges write the follow-up.", ["Approvals hub", "Nudges", "AI capture"]],
-      ["LuPenTool", "Creative team", "A calm focus queue — today's work, auto-sorted, with the vibe of each task at a tap.", ["Focus Queue", "Vibe status", "Focus mode"]],
-      ["LuWallet", "Finance & HR", "A Ready to Bill queue and a “what to bill” checklist, so nothing shipped goes uninvoiced.", ["Ready to Bill", "PM–Finance board", "Leave & holidays"]],
+      ["LuCrown", "Founder", "Stops asking “where are we?”", "Gets the whole studio at a glance, a weekly AI read and a 6 PM standup."],
+      ["LuClipboardCheck", "Project manager", "Stops chasing people and clients", "Gets one approvals inbox, drafted nudges and tasks spoken in by voice."],
+      ["LuPenTool", "Creative team", "Stops filling in trackers", "Gets a sorted Focus Queue, a vibe on every task and weekly wins."],
+      ["LuWallet", "Finance & HR", "Stops hunting for what to bill", "Gets a Ready to Bill queue, a what-to-bill checklist, and leave in one place."],
     ];
-    const cw = (W - 2 * M - 3 * 0.22) / 4, y = 2.45, ch = 4.2;
+    const cw = (W - 2 * M - 3 * 0.22) / 4, y = 2.45, ch = 4.1;
     for (let i = 0; i < 4; i++) {
-      const x = M + i * (cw + 0.22);
-      card(s, x, y, cw, ch, i === 0 ? C.lime : C.surface, i === 0 ? null : C.line);
-      const dark = i === 0;
+      const x = M + i * (cw + 0.22), dark = i === 2;
+      card(s, x, y, cw, ch, dark ? C.lime : C.surface, dark ? null : C.line);
       await iconBadge(s, r[i][0], x + 0.3, y + 0.3, 0.62, dark ? C.ink : C.surface2, C.lime);
       T(s, r[i][1], { x: x + 0.3, y: y + 1.15, w: cw - 0.5, h: 0.4, fontFace: F.display, bold: true, fontSize: 19, color: dark ? C.ink : C.white });
-      T(s, r[i][2], { x: x + 0.3, y: y + 1.62, w: cw - 0.55, h: 1.3, fontSize: 12.5, color: dark ? "25300C" : C.muted, lineSpacingMultiple: 1.2 });
-      T(s, "THEY LIVE IN", { x: x + 0.3, y: y + 2.95, w: cw - 0.5, h: 0.2, fontFace: F.label, bold: true, fontSize: 8, color: dark ? "3A4A10" : C.dim, charSpacing: 1.5 });
-      T(s, r[i][3].join("  ·  "), { x: x + 0.3, y: y + 3.2, w: cw - 0.5, h: 0.7, fontSize: 11.5, bold: true, color: dark ? C.ink : C.white, lineSpacingMultiple: 1.2 });
+      T(s, r[i][2], { x: x + 0.3, y: y + 1.65, w: cw - 0.55, h: 0.7, fontSize: 14, bold: true, color: dark ? C.ink : C.lime, lineSpacingMultiple: 1.15 });
+      T(s, r[i][3], { x: x + 0.3, y: y + 2.5, w: cw - 0.55, h: 1.3, fontSize: 12, color: dark ? "25300C" : C.muted, lineSpacingMultiple: 1.2 });
     }
     footer(s, n);
-    s.addNotes("Tailor this to who's in the room. If it's the founder, lead with the lime card. If it's an ops or PM lead, spend time on the approvals inbox and nudges.");
+    s.addNotes("Tailor this to who's in the room. The creative team card is highlighted on purpose: if the people doing the work enjoy the app, everything else follows.");
   }
 
   // ===== 10. BEFORE / AFTER =====
   {
     const s = pres.addSlide(); n++; bg(s);
-    header(s, "09  ·  THE CHANGE", "Same team. Different week.", "From chasing status to seeing the work.");
-    const before = ["Briefs scattered across WhatsApp, email and memory", "Status known only by asking each person", "Blocked work waits until someone notices", "Delivered work slips through before it's billed", "The morning goes on a status meeting"];
-    const after = ["Every brief captured once — by voice, in any language", "Status visible at a glance, with a live vibe", "Blocked-task nudges write the follow-up", "A Ready to Bill queue: nothing shipped goes uninvoiced", "A 6 PM standup digest, written for you"];
+    header(s, "10  ·  THE CHANGE", "Monday morning, before and after.", "Same team, same clients. A much lighter start to the week.");
+    const before = ["Open WhatsApp to 40 unread messages", "Ask three people where the OXY copy is", "Nobody is sure what's due today", "A status meeting eats the first hour", "Last week's wins go unnoticed"];
+    const after = ["Open Bod App to 4 sorted tasks", "Status and vibe live on every card", "Today's deadlines at the top of the queue", "Friday's 6 PM digest already went out", "Bod Annan: \u201CYou shipped 4 deliverables\u201D"];
     const cw = (W - 2 * M - 0.3) / 2, y = 2.45, ch = 4.3;
     card(s, M, y, cw, ch);
     card(s, M + cw + 0.3, y, cw, ch, C.lime, null);
@@ -369,29 +375,7 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
       }
     }
     footer(s, n);
-    s.addNotes("Read the rows across — each 'before' has a matching 'after'. Ask the prospect which row describes their week right now.");
-  }
-
-  // ===== 11. COST =====
-  {
-    const s = pres.addSlide(); n++; bg(s);
-    header(s, "10  ·  THE COST", "The bill for coordination nobody counts.", "Illustration: 10 people  ·  22 working days  ·  30 minutes of coordination per person, per day.");
-    const c = [
-      ["30 min", "PER PERSON / DAY", "Chasing status, re-explaining briefs and hunting for files.", C.surface, C.white],
-      ["110 hrs", "PER MONTH", "Lost across a ten-person team — most of a full-time salary.", C.surface, C.white],
-      ["₹2,990", "BOD APP ADVANCED / MONTH", "The full setup for that same ten-person team (10 seats × ₹299).", C.lime, C.ink],
-    ];
-    const cw = (W - 2 * M - 2 * 0.22) / 3, y = 2.55, ch = 3.1;
-    for (let i = 0; i < 3; i++) {
-      const x = M + i * (cw + 0.22), lime = i === 2;
-      card(s, x, y, cw, ch, c[i][3], lime ? null : C.line);
-      T(s, c[i][0], { x: x + 0.4, y: y + 0.4, w: cw - 0.8, h: 1.0, fontFace: F.display, bold: true, fontSize: 54, color: lime ? C.ink : C.lime });
-      T(s, c[i][1], { x: x + 0.4, y: y + 1.55, w: cw - 0.8, h: 0.25, fontFace: F.label, bold: true, fontSize: 9.5, color: lime ? "2B3510" : C.white, charSpacing: 1.5 });
-      T(s, c[i][2], { x: x + 0.4, y: y + 1.95, w: cw - 0.8, h: 0.8, fontSize: 13, color: lime ? "25300C" : C.muted, lineSpacingMultiple: 1.2 });
-    }
-    T(s, "Run the arithmetic with your own team size and hourly cost. It rarely comes out close.", { x: M, y: 6.1, w: W - 2 * M, h: 0.35, fontSize: 15, bold: true });
-    footer(s, n);
-    s.addNotes("10 people × 30 minutes × 22 days = 110 hours a month spent on coordination. Compare that with ₹2,990 a month for ten seats on Advanced. Ask for their team size and do the maths live.");
+    s.addNotes("Read the rows across — each 'before' has a matching 'after'. Ask the prospect which row describes their Monday right now.");
   }
 
   // ===== 12. PRICING =====
@@ -490,12 +474,12 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     const s = pres.addSlide(); n++; bg(s);
     header(s, "14  ·  QUESTIONS", "The questions you're already thinking.", "Short answers. No jargon.");
     const q = [
-      ["We already use WhatsApp.", "WhatsApp is where work gets discussed, not tracked. Bod App gives the work a home — and still nudges on WhatsApp."],
-      ["We tried a project tool. It died.", "Usually because it demanded setup before it gave anything back. Bod App sorts your day from the first task you add."],
-      ["Who has time to migrate?", "There's nothing to migrate. Start with this week's tasks — or speak them in. History can stay where it is."],
-      ["Does it replace our invoicing?", "No. It runs a “what to bill” checklist and a Ready to Bill queue. Amounts and invoices stay in Zoho."],
-      ["Is the AI really multilingual?", "Yes — Malayalam, English or Manglish, by voice or text. It parses the who, what and when into a draft task."],
-      ["Which devices?", "iOS, Android and web from one codebase — with home-screen widgets on mobile and offline caching when the signal drops."],
+      ["Isn't “playful” a distraction?", "The fun is small and in the right places: a weekly win, a vibe, a kind nudge. Bod Annan shows up at about one in five moments."],
+      ["Will my team actually use it?", "Opening it saves time instead of costing it. Today's list is already sorted, and the updates write themselves."],
+      ["We already use WhatsApp.", "Keep it for conversation. Bod App gives the work a home, and still sends nudges on WhatsApp."],
+      ["Who has time to migrate?", "There's nothing to migrate. Start with this week's tasks, or just speak them in."],
+      ["Does it replace our invoicing?", "No. It tells Finance what to bill. Amounts and invoices stay in Zoho."],
+      ["Is the AI really multilingual?", "Yes: Malayalam, English or Manglish, by voice or text. iOS, Android and web."],
     ];
     const cw = (W - 2 * M - 0.25) / 2, ch = 1.25;
     for (let i = 0; i < 6; i++) {
@@ -505,7 +489,7 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
       T(s, q[i][1], { x: x + 0.35, y: y + 0.58, w: cw - 0.7, h: 0.6, fontSize: 12, color: C.muted, lineSpacingMultiple: 1.15 });
     }
     footer(s, n);
-    s.addNotes("Pre-empt the objections. The two that come up most: 'we already use WhatsApp' and 'does it replace our invoicing'.");
+    s.addNotes("The first two are the real objections for a 'playful' tool. Answer them with the time saved, not the fun.");
   }
 
   // ===== 16. CTA =====
@@ -515,8 +499,8 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     T(s, "Bod App", { x: M + 0.78, y: 0.5, w: 3, h: 0.36, fontFace: F.display, bold: true, fontSize: 20, color: C.ink });
     T(s, "A BOD STUDIO PRODUCT", { x: M + 0.78, y: 0.88, w: 3, h: 0.22, fontFace: F.label, bold: true, fontSize: 8.5, color: "2B3510", charSpacing: 2 });
     T(s, "NEXT STEP", { x: M, y: 1.75, w: 4, h: 0.25, fontFace: F.label, bold: true, fontSize: 10, color: "2B3510", charSpacing: 2 });
-    T(s, [{ text: "Run your studio", options: { breakLine: true } }, { text: "the calm way." }], { x: M, y: 2.1, w: 7.5, h: 1.9, fontFace: F.serif, italic: true, bold: true, fontSize: 58, color: C.ink, lineSpacingMultiple: 0.95 });
-    T(s, "Start the 14-day free trial, or book a 20-minute walkthrough on your real workflow. If it doesn't hold up, you've lost two weeks and no money.", { x: M, y: 4.15, w: 6.8, h: 0.8, fontSize: 15, color: "25300C", lineSpacingMultiple: 1.2 });
+    T(s, [{ text: "Give your team", options: { breakLine: true } }, { text: "the fun half back." }], { x: M, y: 2.1, w: 8, h: 1.9, fontFace: F.serif, italic: true, bold: true, fontSize: 56, color: C.ink, lineSpacingMultiple: 0.95 });
+    T(s, "Start the 14-day free trial, or book a 20-minute walkthrough on your real workflow. If your team doesn't enjoy it, you've lost two weeks and no money.", { x: M, y: 4.15, w: 7.2, h: 0.8, fontSize: 15, color: "25300C", lineSpacingMultiple: 1.2 });
     pill(s, M, 5.1, 2.3, 0.52, "START FREE TRIAL  →", { fill: C.ink, color: C.lime, size: 10.5, cs: 1.5 });
     pill(s, M + 2.45, 5.1, 2.3, 0.52, "DEMO ON WHATSAPP", { fill: C.lime, line: C.ink, color: C.ink, size: 10.5, cs: 1.5 });
     const ct = [["WHATSAPP", "+91 7356 333 975"], ["EMAIL", "info@storibodcreatives.com"], ["WEB", "mybodstudio.com"], ["INSTAGRAM", "@storibod.creatives"]];
@@ -529,7 +513,37 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     }
     const ph = 6.9;
     s.addImage({ path: IMG("fig_tasks_crop.png"), x: 9.15, y: 0.3, w: ph * 0.49, h: ph });
-    s.addNotes("Close on the trial. Two options: start free (email) or a WhatsApp demo. Leave this slide up while you swap contact details.");
+    s.addNotes("Close on the trial. Two options: start free by email or a WhatsApp demo. Leave this slide up while you swap contact details.");
+  }
+
+  // ===== 8. FEATURE BENTO =====
+  {
+    const s = pres.addSlide(); n++; bg(s);
+    header(s, "APPENDIX  ·  EVERYTHING INCLUDED", "The full feature list.", "Twelve features that replace a board, a sheet, a WhatsApp group and a standup meeting.");
+    const f = [
+      ["LuListTodo", "Focus Queue", "One auto-sorted list for today, overdue first."],
+      ["LuWorkflow", "Task pipeline", "Pending to Billed, role-aware at every step."],
+      ["LuSmile", "Vibe status", "Long-press a task to set its mood."],
+      ["LuMic", "AI capture", "Voice or text in Malayalam, English, Manglish."],
+      ["LuPalette", "Client colours", "Every client gets its own accent, everywhere."],
+      ["LuBellRing", "Smart nudges", "A follow-up drafted after 48h on a client."],
+      ["LuClock", "Auto standup", "A 6 PM digest, one tap to copy or post."],
+      ["LuReceipt", "Billing checklist", "What to bill, not how much. Zoho keeps the rest."],
+      ["LuInbox", "Approvals hub", "Requests, notes and PDF tasks in one PM inbox."],
+      ["LuMessageCircle", "Team & task chat", "Group and per-task threads, files, voice notes."],
+      ["LuSparkles", "What's next? AI", "Ask which task to pick up next. Get a reason."],
+      ["LuSmartphone", "Home widgets", "Your top tasks and AI briefing on the home screen."],
+    ];
+    const gx = 0.2, gy = 0.18, cw = (W - 2 * M - 3 * gx) / 4, ch = 1.38;
+    for (let i = 0; i < 12; i++) {
+      const x = M + (i % 4) * (cw + gx), y = 2.35 + Math.floor(i / 4) * (ch + gy);
+      card(s, x, y, cw, ch);
+      await iconBadge(s, f[i][0], x + 0.22, y + 0.22, 0.46);
+      T(s, f[i][1], { x: x + 0.82, y: y + 0.22, w: cw - 0.95, h: 0.46, valign: "middle", fontFace: F.display, bold: true, fontSize: 14 });
+      T(s, f[i][2], { x: x + 0.22, y: y + 0.8, w: cw - 0.4, h: 0.5, fontSize: 11, color: C.muted, lineSpacingMultiple: 1.1 });
+    }
+    footer(s, n);
+    s.addNotes("The full feature set on one page. Point out that none of these need setup or training — they show up the moment the team starts adding tasks.");
   }
 
   await pres.writeFile({ fileName: path.join(__dirname, "Bod-App-Sales-Deck.pptx") });
