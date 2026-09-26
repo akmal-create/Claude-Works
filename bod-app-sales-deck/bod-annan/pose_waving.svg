@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 150 1200 1100">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 4.91px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-3, .cls-4, .cls-7, .cls-8 {
+        stroke: #fff200;
+      }
+
+      .cls-1, .cls-6 {
+        opacity: .9;
+      }
+
+      .cls-2, .cls-5, .cls-6 {
+        stroke-width: .91px;
+      }
+
+      .cls-2, .cls-5, .cls-6, .cls-9 {
+        stroke: #440e1e;
+      }
+
+      .cls-2, .cls-8 {
+        opacity: .4;
+      }
+
+      .cls-3 {
+        stroke-width: 10.87px;
+      }
+
+      .cls-10 {
+        fill: #bc0000;
+      }
+
+      .cls-4 {
+        stroke-linecap: round;
+        stroke-width: 28.47px;
+      }
+
+      .cls-5, .cls-7 {
+        opacity: .25;
+      }
+
+      .cls-11 {
+        fill: #4424ff;
+      }
+
+      .cls-12 {
+        fill: #fff;
+      }
+
+      .cls-13, .cls-9 {
+        fill: #440e1e;
+      }
+
+      .cls-7 {
+        stroke-width: 5.5px;
+      }
+
+      .cls-8 {
+        stroke-width: 5.14px;
+      }
+
+      .cls-9 {
+        stroke-width: 1.07px;
+      }
+
+      .cls-14 {
+        fill: #fff200;
+      }
+    </style>
+  <mask id="out" maskUnits="userSpaceOnUse" x="-500" y="-500" width="3000" height="3000"><rect x="-500" y="-500" width="3000" height="3000" fill="#fff"/><path d="M921.81,1236.56H187l83.22-222.45V425.91c0-45.45,15.74-92.81,44.37-123.71,31.64-34.14,78.63-49.51,128.85-49.51h242.8c91.18,0,165.09,73.91,165.09,165.09v598.16l70.48,220.63Z" fill="#000"/></mask></defs>
+  
+  <g id="Hair">
+    <path class="cls-1" d="M445.43,452.52c0-125.55,30.13-227.33,67.29-227.33s67.29,101.78,67.29,227.33"/>
+    <path class="cls-1" d="M540.39,452.52c0-125.55,30.13-227.33,67.29-227.33s67.29,101.78,67.29,227.33"/>
+    <path class="cls-7" d="M348.45,453.67c0-125.55,37.82-227.33,84.48-227.33s84.48,101.78,84.48,227.33"/>
+    <path class="cls-7" d="M603.83,453.67c0-125.55,37.82-227.33,84.48-227.33s84.48,101.78,84.48,227.33"/>
+    <path class="cls-8" d="M400.21,452.52c0-125.55,33.03-227.33,73.77-227.33s73.77,101.78,73.77,227.33"/>
+    <path class="cls-8" d="M574.73,452.52c0-125.55,33.03-227.33,73.77-227.33s73.77,101.78,73.77,227.33"/>
+    <path class="cls-3" d="M494.33,453.67c0-125.55,30.27-227.33,67.61-227.33s67.61,101.78,67.61,227.33"/>
+  </g>
+  <path id="Body" class="cls-11" d="M921.81,1236.56H187l83.22-222.45V425.91c0-45.45,15.74-92.81,44.37-123.71,31.64-34.14,78.63-49.51,128.85-49.51h242.8c91.18,0,165.09,73.91,165.09,165.09v598.16l70.48,220.63Z"/>
+  <path id="Eye_02" class="cls-12" d="M743.92,592.98c0,46.76-37.91,84.67-84.67,84.67s-84.67-32.53-84.67-84.67c0-46.76,37.91-84.67,84.67-84.67s84.67,37.91,84.67,84.67Z"/>
+  <g id="Eye_ring_02" data-name="Eye ring 02">
+    <circle class="cls-6" cx="652.78" cy="596.31" r="22.88"/>
+    <path class="cls-5" d="M669.36,596.43c0,12.64-10.24,22.88-22.88,22.88s-22.88-8.79-22.88-22.88c0-12.64,10.24-22.88,22.88-22.88s22.88,10.24,22.88,22.88Z"/>
+    <circle class="cls-2" cx="649.53" cy="596.31" r="22.88"/>
+  </g>
+  <path id="Eye_Dot_02" data-name="Eye Dot 02" class="cls-13" d="M681.24,596.45c0,13.1-10.62,23.72-23.72,23.72s-23.72-9.11-23.72-23.72c0-13.1,10.62-23.72,23.72-23.72s23.72,10.62,23.72,23.72Z"/>
+  <g transform="rotate(-16 665 450)"><g transform="translate(0,-24)"><path id="Eyebrow_2" data-name="Eyebrow 2" class="cls-14" d="M718.4,492.02l-94.46-49.34s-32.31-16.34-22.62-34.12c0,0,7.67-26.4,43.68-10.96,36.01,15.43,99.8,39.44,99.8,39.44,0,0,43.9,8.23,37.38,33.27-4.8,15.09-10.29,25.38-10.29,25.38,0,0-13.38,17.49-32.92,6.86-19.55-10.63-20.57-10.53-20.57-10.53Z"/></g></g>
+  <path id="Eye_01" class="cls-12" d="M549.38,592.98c0,46.76-37.91,84.67-84.67,84.67s-84.67-32.53-84.67-84.67c0-46.76,37.91-84.67,84.67-84.67s84.67,37.91,84.67,84.67Z"/>
+  <g id="Eye_ring_01" data-name="Eye ring 01">
+    <circle class="cls-6" cx="456.5" cy="596.31" r="22.88"/>
+    <path class="cls-5" d="M473.08,596.43c0,12.64-10.24,22.88-22.88,22.88s-22.88-8.79-22.88-22.88c0-12.64,10.24-22.88,22.88-22.88s22.88,10.24,22.88,22.88Z"/>
+    <circle class="cls-2" cx="453.25" cy="596.31" r="22.88"/>
+  </g>
+  <path id="Eye_Dot_01" data-name="Eye Dot 01" class="cls-9" d="M484.96,596.45c0,13.1-10.62,23.72-23.72,23.72s-23.72-9.11-23.72-23.72c0-13.1,10.62-23.72,23.72-23.72s23.72,10.62,23.72,23.72Z"/>
+  <g transform="rotate(16 450 440)"><g transform="translate(0,-24)"><path id="Eybrow_1" data-name="Eybrow 1" class="cls-14" d="M383.41,435l101.68-31.9s34.41-11.29,40.12,8.13c0,0,13.24,24.09-23.13,38.64-36.38,14.55-98.46,42.68-98.46,42.68,0,0-36.86,25.22-49.96,2.91-7.28-14.07-10.67-25.22-10.67-25.22,0,0-2.91-21.83,18.43-28.13,21.34-6.31,21.99-7.11,21.99-7.11Z"/></g></g>
+  <path class="cls-4" d="M440,735 q120,100 245,0"/>
+<g mask="url(#out)"><path d="M330,790 Q205,860 222,1000" fill="none" stroke="#2A10C4" stroke-width="92" stroke-linecap="round"/><circle cx="222" cy="1010" r="56" fill="#2A10C4"/></g><path d="M330,790 Q205,860 222,1000" fill="none" stroke="#4424FF" stroke-width="80" stroke-linecap="round"/><circle cx="222" cy="1010" r="50" fill="#4424FF"/><g mask="url(#out)"><path d="M860,790 Q1020,720 1040,560" fill="none" stroke="#2A10C4" stroke-width="92" stroke-linecap="round"/><circle cx="1042" cy="535" r="56" fill="#2A10C4"/></g><path d="M860,790 Q1020,720 1040,560" fill="none" stroke="#4424FF" stroke-width="80" stroke-linecap="round"/><circle cx="1042" cy="535" r="50" fill="#4424FF"/><path d="M1105,470 q30,40 10,90" stroke="#B8E62E" stroke-width="14" fill="none" stroke-linecap="round"/><path d="M1140,440 q45,60 15,135" stroke="#B8E62E" stroke-width="14" fill="none" stroke-linecap="round" opacity=".6"/></svg>
