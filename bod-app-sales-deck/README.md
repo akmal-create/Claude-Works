@@ -1,8 +1,10 @@
-# Bod App — Sales Deck
+# Bod App — Client Pitch Deck
 
-- `Bod-App-Sales-Deck.pptx` — editable deck (15 slides told as a story (a day with Bod App), then how it works, features today, the coming update, trial and close)
-- `Bod-App-Sales-Deck.pdf` — PDF export with brand fonts embedded, ready to send
-- `fonts/` — Epilogue, Manrope, Plus Jakarta Sans, Fraunces (Google Fonts, OFL). Install these before editing the PPTX, or PowerPoint will substitute fonts.
-- `source/` — generator (`node deck.js`, needs `pptxgenjs sharp react react-dom react-icons`) and the iPhone mockups it uses.
-
-Content sourced from the Bod App website build, its CLAUDE.md, the app's CLAUDE.md, RELEASE_NOTES.md and DARK_THEME_HANDOFF.md.
+- `Bod-App-Pitch-Deck.pptx` — editable deck, 15 slides, speaker notes on every slide
+- `Bod-App-Pitch-Deck.pdf` — PDF with brand fonts embedded
+- `fonts/` — Epilogue, Manrope, Plus Jakarta Sans (install before editing the PPTX)
+- `mockups/` — app screens composited into iPhone 16 Pro frames (dark, light, custom accent); `compose_mockup.py` fits any 1080×2340 screen into a frame
+- `screens/` — editable HTML sources for every app screen (dark + light)
+- `bod-annan/` — Bod Annan pose SVGs built on the master vector
+- `source/` — deck generator (`node deck_full.js`); bubble sizes come from `bubbles.py`
+- `samples/` — design sign-off samples; `archive/` — earlier deck versions
