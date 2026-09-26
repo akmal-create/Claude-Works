@@ -1,6 +1,6 @@
 import json, sys
 from PIL import ImageFont
-FONT="/root/.fonts/Manrope-700.ttf"; PT=15; MAXW=2.7  # inches of text
+FONT="/root/.fonts/Manrope-800.ttf"; PT=15; MAXW=2.6  # inches of text
 f=ImageFont.truetype(FONT, PT*10)  # measure at 10x for precision
 def w_in(t): return f.getlength(t)/10/72
 def wrap(t):
