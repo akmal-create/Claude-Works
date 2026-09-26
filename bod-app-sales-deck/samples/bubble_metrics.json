@@ -1,0 +1,30 @@
+{
+ "Come in. Let me show you around.": {
+  "lines": [
+   "Come in. Let me",
+   "show you around."
+  ],
+  "w": 1.7701171875
+ },
+ "No reply yet? I've written the follow-up for you.": {
+  "lines": [
+   "No reply yet? I've written",
+   "the follow-up for you."
+  ],
+  "w": 2.4783203125
+ },
+ "Every job, same path. I watch every step.": {
+  "lines": [
+   "Every job, same path.",
+   "I watch every step."
+  ],
+  "w": 2.131705729166667
+ },
+ "Come by. I'll show you around.": {
+  "lines": [
+   "Come by. I'll",
+   "show you around."
+  ],
+  "w": 1.7701171875
+ }
+}

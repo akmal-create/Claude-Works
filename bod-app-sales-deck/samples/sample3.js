@@ -75,16 +75,33 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
   const span = (a, b) => (b - a + 1) * COL + (b - a) * GUT; // width from col a to col b
   const TOP = 0.7, BASE = 6.95;                              // top margin, footer baseline row
   const TS = { hero: 88, h1: 44, h2: 22, body: 18, small: 14, label: 10 };
-  const R = { m_front_home_dark: 0.4833, m_front_nudge_dark: 0.4833, m_front_nudge_light: 0.4833, annan_waving: 0.9929, annan_pointing: 0.9936, annan_proud: 0.8307 };
+  const AM = JSON.parse(require("fs").readFileSync(path.join(__dirname, "s", "img", "annan_metrics.json"), "utf8"));
+  const BM = JSON.parse(require("fs").readFileSync(path.join(__dirname, "bubble_metrics.json"), "utf8"));
+  const R = { m_front_home_dark: 0.4833, m_front_nudge_dark: 0.4833, m_front_nudge_light: 0.4833, m_angR_focus_light: 0.4567, m_angL_tasks_dark: 0.4228 };
   const pic = (s, name, x, y, h, o = {}) => s.addImage({ path: IMG(name + ".png"), x, y, h, w: h * R[name], ...o });
   const label = (s, text, x, y, w, color = C.lime) => T(s, text, { x, y, w, h: 0.22, fontFace: F.label, bold: true, fontSize: TS.label, color, charSpacing: 2 });
-  const bubble = (s, x, y, w, h, text, tail, tx = 0.4) => {
-    s.addShape("roundRect", { x, y, w, h, fill: { color: C.white }, line: { type: "none" }, rectRadius: 0.2 });
-    const t = 0.24;
-    if (tail === "down") s.addShape("triangle", { x: x + tx, y: y + h - 0.01, w: t, h: t * 0.8, fill: { color: C.white }, line: { type: "none" }, rotate: 180 });
-    if (tail === "left") s.addShape("triangle", { x: x - t * 0.8 + 0.01, y: y + h / 2 - t / 2, w: t, h: t * 0.8, fill: { color: C.white }, line: { type: "none" }, rotate: 270 });
-    if (tail === "right") s.addShape("triangle", { x: x + w - 0.01, y: y + h / 2 - t / 2, w: t, h: t * 0.8, fill: { color: C.white }, line: { type: "none" }, rotate: 90 });
-    T(s, text, { x: x + 0.25, y, w: w - 0.5, h, valign: "middle", fontSize: TS.small + 1, bold: true, color: C.ink, lineSpacingMultiple: 1.1 });
+  // Bod Annan: place a pose and return head/eye anchors (inches)
+  const annan = (s, pose, x, y, h) => {
+    const m = AM[pose], w = h * m.ar;
+    s.addImage({ path: IMG("annan_" + pose + ".png"), x, y, w, h });
+    return { x, y, w, h, top: y + m.top * h, cx: x + m.headCx * w, hl: x + m.headL * w, hr: x + m.headR * w, eye: y + m.eyeY * h };
+  };
+  // Speech bubble: size from measured text; fixed padding; tail always points at Annan's head.
+  const PADX = 0.26, PADY = 0.18, LH = 0.255, TAIL = 0.2, GAP = 0.06;
+  const bubble = (s, a, text, mode, f = 0.32) => {
+    const mt = BM[text]; if (!mt) throw new Error("measure bubble: " + text);
+    const w = mt.w + 2 * PADX + 0.08, h = mt.lines.length * LH + 2 * PADY;
+    let x, y;
+    if (mode === "above") { x = a.cx - f * w; y = a.top - TAIL - GAP - h; }
+    if (mode === "left")  { x = a.hl - TAIL - GAP - w; y = a.eye - h / 2; }
+    if (mode === "right") { x = a.hr + TAIL + GAP; y = a.eye - h / 2; }
+    s.addShape("roundRect", { x, y, w, h, fill: { color: C.white }, line: { type: "none" }, rectRadius: 0.18 });
+    const tw = 0.26;
+    if (mode === "above") s.addShape("triangle", { x: a.cx - tw / 2, y: y + h - 0.01, w: tw, h: TAIL, fill: { color: C.white }, line: { type: "none" }, rotate: 180 });
+    if (mode === "left")  s.addShape("triangle", { x: x + w - 0.01 - (tw - TAIL) / 2, y: a.eye - TAIL / 2 - (tw - TAIL) / 2, w: tw, h: TAIL, fill: { color: C.white }, line: { type: "none" }, rotate: 90 });
+    if (mode === "right") s.addShape("triangle", { x: x - TAIL + 0.01 - (tw - TAIL) / 2, y: a.eye - TAIL / 2 - (tw - TAIL) / 2, w: tw, h: TAIL, fill: { color: C.white }, line: { type: "none" }, rotate: 270 });
+    T(s, mt.lines.join("\n"), { x: x + PADX, y: y + PADY, w: w - 2 * PADX, h: h - 2 * PADY, valign: "middle", fontSize: 15, bold: true, color: C.ink, lineSpacing: 18.4 });
+    return { x, y, w, h };
   };
   const foot = (s, num) => {
     label(s, "BOD APP  ·  THE TASK APP FOR CREATIVE AGENCIES", GM, BASE, 7, C.dim);
@@ -101,32 +118,30 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
     T(s, "Bod App", { x: GM, y: 2.35, w: span(1, 7), h: 1.4, fontFace: F.display, bold: true, fontSize: TS.hero, valign: "bottom" });
     T(s, "The task app for creative agencies.", { x: GM, y: 3.85, w: span(1, 7), h: 0.5, fontFace: F.display, bold: true, fontSize: 26, color: C.lime });
     T(s, "It handles the admin, so your team can do the work.", { x: GM, y: 4.45, w: span(1, 5), h: 0.8, fontSize: TS.body, color: C.muted, lineSpacingMultiple: 1.25 });
-    label(s, "MYBODSTUDIO.COM", GM, BASE, 4, C.dim);
+    label(s, "BODSTUDIO.COM", GM, BASE, 4, C.dim);
     pic(s, "m_front_home_dark", phX, phY, phH);
-    const aH = 2.7, aW = aH * R.annan_waving, aX = phX - aW + 0.3, aY = phY + phH - aH;
-    pic(s, "annan_waving", aX, aY, aH);
-    bubble(s, aX + 0.4, aY - 1.05, 2.6, 0.78, "Come in. Let me show you around.", "down", 0.7);
+    const aH = 2.7, a = annan(s, "waving", phX - aH * AM.waving.ar + 0.3, phY + phH - aH, aH);
+    bubble(s, a, "Come in. Let me show you around.", "above", 0.2);
     s.addNotes("Open light. Bod Annan greets the room; the phone shows the home screen.");
   }
 
-  // ===== 3 PM =====
+  // ===== CLIENT GONE QUIET =====
   {
     const s = pres.addSlide(); n++; bg(s);
     const phH = 6.0, phW = phH * R.m_front_nudge_dark, dX = cx(8), phY = TOP + 0.05;
     const lH = 5.3, lW = lH * R.m_front_nudge_light, lX = W - GM - lW, lY = phY + phH - lH;
     s.addImage({ path: IMG("glow.png"), x: dX - 1.6, y: -0.6, w: 7.6, h: 7.6 });
-    label(s, "3 PM", GM, TOP, 3);
+    label(s, "FOLLOW-UPS", GM, TOP, 3);
     T(s, "The client's\ngone quiet.", { x: GM, y: TOP + 0.4, w: span(1, 6), h: 1.55, fontFace: F.display, bold: true, fontSize: TS.h1, lineSpacingMultiple: 1.0 });
-    T(s, "After two days of waiting, Bod App drafts the follow-up. You just send it.", { x: GM, y: TOP + 2.1, w: span(1, 5), h: 0.85, fontSize: TS.body, color: C.muted, lineSpacingMultiple: 1.25 });
-    const aH = 2.45, aY = BASE - 0.2 - aH;
-    pic(s, "annan_pointing", GM - 0.15, aY, aH);
-    bubble(s, GM + aH * R.annan_pointing + 0.2, aY + 0.35, 2.75, 0.85, "Two days, no reply. I've written it for you.", "left");
+    T(s, "Bod App notices, and drafts the follow-up for you. You just send it.", { x: GM, y: TOP + 2.0, w: span(1, 5), h: 0.85, fontSize: TS.body, color: C.muted, lineSpacingMultiple: 1.25 });
+    const aH = 1.9, a = annan(s, "pointing", GM - 0.1, BASE - 0.2 - aH, aH);
+    bubble(s, a, "No reply yet? I've written the follow-up for you.", "above");
     pic(s, "m_front_nudge_light", lX, lY, lH);
     pic(s, "m_front_nudge_dark", dX, phY, phH);
     T(s, "DARK THEME", { x: dX, y: BASE, w: phW, h: 0.22, align: "center", fontFace: F.label, bold: true, fontSize: TS.label, color: C.dim, charSpacing: 2 });
     T(s, "LIGHT THEME", { x: dX + phW, y: BASE, w: lX + lW - dX - phW, h: 0.22, align: "center", fontFace: F.label, bold: true, fontSize: TS.label, color: C.dim, charSpacing: 2 });
     label(s, "BOD APP  ·  THE TASK APP FOR CREATIVE AGENCIES", GM, BASE, 5.5, C.dim);
-    s.addNotes("This is the follow-up nudge. It appears once a task has waited on a client for two days.");
+    s.addNotes("The follow-up nudge appears when a task has been waiting on a client. Each team sets how long that is.");
   }
 
   // ===== HOW IT WORKS =====
@@ -139,11 +154,11 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
       ["LuMic", "Brief comes in", "Say it, type it or drop the PDF."],
       ["LuUserCheck", "Gets assigned", "The PM approves it once."],
       ["LuEye", "Work happens", "Everyone can see where it's at."],
-      ["LuBellRing", "Client nudged", "Quiet for two days? It follows up."],
+      ["LuBellRing", "Client nudged", "Gone quiet? It drafts the follow-up."],
       ["LuReceipt", "Billed", "Done work goes straight to billing."],
     ];
     const g = 0.35, cw = (W - 2 * GM - 4 * g) / 5, iy = 3.05, is = 0.95;
-    s.addShape("line", { x: GM + is, y: iy + is / 2, w: W - 2 * GM - cw - is + is, h: 0, line: { color: C.line, width: 1.5 } });
+    s.addShape("line", { x: GM + is, y: iy + is / 2, w: W - 2 * GM - cw, h: 0, line: { color: C.line, width: 1.5 } });
     for (let i = 0; i < 5; i++) {
       const x = GM + i * (cw + g);
       s.addShape("ellipse", { x, y: iy, w: is, h: is, fill: { color: i === 4 ? C.lime : C.surface }, line: { color: i === 4 ? C.lime : C.line, width: 1 } });
@@ -152,11 +167,33 @@ const bg = (slide, c = C.bg) => (slide.background = { color: c });
       T(s, st[i][1], { x, y: iy + is + 0.65, w: cw, h: 0.8, fontFace: F.display, bold: true, fontSize: TS.h2, lineSpacingMultiple: 1.0 });
       T(s, st[i][2], { x, y: iy + is + 1.55, w: cw, h: 0.7, fontSize: TS.small + 1, color: C.muted, lineSpacingMultiple: 1.25 });
     }
-    const aH = 1.9, aW = aH * R.annan_proud, aX = W - GM - aW, aY = TOP - 0.05;
-    pic(s, "annan_proud", aX, aY, aH);
-    bubble(s, aX - 3.05, aY + 0.45, 2.75, 0.8, "Every job, same path. I watch every step.", "right");
-    foot(s, 11);
-    s.addNotes("Usually: briefs arrive on WhatsApp at 11 pm, nobody knows who owns what, status lives in people's heads, the client goes quiet for three days, and finished work sits unbilled. With Bod App each of those steps is handled.");
+    const aH = 1.95, a = annan(s, "proud", W - GM - aH * AM.proud.ar + 0.12, TOP - 0.1, aH);
+    bubble(s, a, "Every job, same path. I watch every step.", "left");
+    foot(s, 3);
+    s.addNotes("Usually: briefs arrive on WhatsApp late at night, nobody knows who owns what, status lives in people's heads, the client goes quiet, and finished work sits unbilled. With Bod App each of those steps is handled.");
+  }
+
+  // ===== CTA =====
+  {
+    const s = pres.addSlide(); n++; bg(s);
+    const phH = 6.1, phW = phH * R.m_angR_focus_light, phX = W - GM - phW, phY = (H - phH) / 2;
+    s.addImage({ path: IMG("glow.png"), x: phX - 2.4, y: phY - 1.3, w: phW + 4.8, h: phW + 4.8 });
+    label(s, "LET'S TALK", GM, TOP, 4);
+    T(s, "Come see\nhow it feels.", { x: GM, y: TOP + 0.4, w: span(1, 7), h: 1.55, fontFace: F.display, bold: true, fontSize: TS.h1, lineSpacingMultiple: 1.0 });
+    T(s, "A 20-minute walkthrough on your own workflow.", { x: GM, y: TOP + 2.0, w: span(1, 6), h: 0.45, fontSize: TS.body, color: C.muted });
+    T(s, "bodstudio.com", { x: GM, y: 3.75, w: span(1, 6), h: 0.65, fontFace: F.display, bold: true, fontSize: 36, color: C.lime });
+    const rows = [["SALES", "+91 7356 333 965"], ["EMAIL", "info@storibodcreatives.com"], ["SOCIAL", "@bodstudio"]];
+    for (let i = 0; i < rows.length; i++) {
+      const y = 4.65 + i * 0.5;
+      label(s, rows[i][0], GM, y + 0.06, 1.2, C.dim);
+      T(s, rows[i][1], { x: GM + 1.3, y, w: span(1, 6) - 1.3, h: 0.34, valign: "middle", fontSize: TS.body, bold: true });
+    }
+    s.addImage({ data: tileLime, x: GM, y: BASE - 0.12, w: 0.4, h: 0.4 });
+    label(s, "POWERED BY BOD STUDIO", GM + 0.55, BASE, 4, C.muted);
+    pic(s, "m_angR_focus_light", phX, phY, phH);
+    const aH = 2.5, a = annan(s, "waving", phX - aH * AM.waving.ar + 0.35, phY + phH - aH, aH);
+    bubble(s, a, "Come by. I'll show you around.", "above", 0.25);
+    s.addNotes("Close by offering the walkthrough, not the sale.");
   }
 
   await pres.writeFile({ fileName: path.join(__dirname, "Bod-App-Sample-Slides.pptx") });

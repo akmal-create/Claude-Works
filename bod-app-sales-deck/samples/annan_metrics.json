@@ -1,0 +1,50 @@
+{
+ "waving": {
+  "ar": 0.9929,
+  "headL": 0.1101,
+  "headR": 0.6734,
+  "headCx": 0.3917,
+  "top": 0.0314,
+  "eyeY": 0.3659
+ },
+ "pointing": {
+  "ar": 0.9936,
+  "headL": 0.11,
+  "headR": 0.6722,
+  "headCx": 0.3911,
+  "top": 0.0314,
+  "eyeY": 0.366
+ },
+ "proud": {
+  "ar": 0.8307,
+  "headL": 0.123,
+  "headR": 0.7954,
+  "headCx": 0.4592,
+  "top": 0.0314,
+  "eyeY": 0.366
+ },
+ "listening": {
+  "ar": 0.9086,
+  "headL": 0.1203,
+  "headR": 0.7358,
+  "headCx": 0.4281,
+  "top": 0.0314,
+  "eyeY": 0.3674
+ },
+ "chai": {
+  "ar": 0.92,
+  "headL": 0.1188,
+  "headR": 0.7267,
+  "headCx": 0.4227,
+  "top": 0.0314,
+  "eyeY": 0.3756
+ },
+ "celebrating": {
+  "ar": 1.0143,
+  "headL": 0.1831,
+  "headR": 0.7261,
+  "headCx": 0.4546,
+  "top": 0.0457,
+  "eyeY": 0.3754
+ }
+}
